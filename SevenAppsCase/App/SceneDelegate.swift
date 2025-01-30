@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let userListVC = ViewController()
+        let userListVC = UserListViewController()
         let navigationController = UINavigationController(rootViewController: userListVC)
         
         window.rootViewController = navigationController
