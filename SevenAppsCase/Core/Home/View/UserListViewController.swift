@@ -46,7 +46,8 @@ extension UserListViewController: UserListViewInterface {
     }
     
     func navigateToDetailScreen(user: User) {
-        
+        let detailVC = UserDetailViewController(user: user)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
