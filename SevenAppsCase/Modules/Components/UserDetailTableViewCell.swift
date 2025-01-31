@@ -12,9 +12,25 @@ import UIKit
 final class UserDetailTableViewCell: UITableViewCell {
     static let identifier = "UserDetailTableViewCell"
     
-    private let titleLabel = UILabel()
-    private let detailLabel = UILabel()
-    private let mapView = MKMapView()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let detailLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.mapType = .standard
+        mapView.showsBuildings = false
+        mapView.showsTraffic = false
+        return mapView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,9 +42,6 @@ final class UserDetailTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        titleLabel.numberOfLines = 0
-        detailLabel.numberOfLines = 0
-        
         let stackView = UIStackView(arrangedSubviews: [titleLabel, detailLabel])
         stackView.axis = .vertical
         stackView.spacing = 5
@@ -52,12 +65,15 @@ final class UserDetailTableViewCell: UITableViewCell {
         mapView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(mapView)
         
+        let heightConstraint = mapView.heightAnchor.constraint(equalToConstant: 200)
+        heightConstraint.priority = .defaultHigh // Öncelik düşürülerek çatışma engelleniyor
+
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: contentView.topAnchor),
             mapView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             mapView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            mapView.heightAnchor.constraint(equalToConstant: 200)
+            heightConstraint
         ])
         
         if let annotation = annotation {
@@ -67,4 +83,5 @@ final class UserDetailTableViewCell: UITableViewCell {
             mapView.setRegion(region, animated: true)
         }
     }
+
 }

@@ -11,8 +11,15 @@ import UIKit
 final class UserTableViewCell: UITableViewCell {
     static let identifier = "UserTableViewCell"
     
-    private let nameLabel = UILabel()
-    private let emailLabel = UILabel()
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let emailLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -19,7 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let userListVC = UserListViewController()
+        
+        let networkService = NetworkService()
+        let userRepository = UserRepository(networkService: networkService)
+
+        let viewModel = UserListViewModel(repository: userRepository)
+        let userListVC = UserListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: userListVC)
         
         window.rootViewController = navigationController

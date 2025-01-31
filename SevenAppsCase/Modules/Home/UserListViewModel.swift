@@ -11,7 +11,6 @@ protocol UserListViewModelInterface {
     var view: UserListViewInterface? { get set }
     
     func viewDidLoad()
-    func fetchUsers() async
 }
 
 
@@ -21,7 +20,7 @@ final class UserListViewModel {
     private let repository: UserRepositoryProtocol
     private(set) var users: [User] = []
     
-    init(repository: UserRepositoryProtocol = UserRepository()) {
+    init(repository: UserRepositoryProtocol) {
         self.repository = repository
     }
 }
@@ -29,8 +28,6 @@ final class UserListViewModel {
 extension UserListViewModel: UserListViewModelInterface {
     
     func viewDidLoad() {
-        view?.configureVC()
-        view?.configureUserListTableView()
         Task { await fetchUsers() }
     }
     

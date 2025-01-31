@@ -16,13 +16,29 @@ protocol UserListViewInterface: AnyObject {
 
 // MARK: - User List ViewController
 final class UserListViewController: UIViewController {
-    private var viewModel = UserListViewModel()
-    private let tableView = UITableView()
+    private let viewModel: UserListViewModel
+    
+    init(viewModel: UserListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+  
+    private let tableView: UITableView = {
+       let tableView = UITableView()
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.view = self
         viewModel.viewDidLoad()
+        configureVC()
+        configureUserListTableView()
     }
 }
 
@@ -32,11 +48,11 @@ extension UserListViewController: UserListViewInterface {
     }
     
     func configureUserListTableView() {
-        view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
-        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
+        
+        view.addSubview(tableView)
     }
     
     func reloadUserListTableView() {

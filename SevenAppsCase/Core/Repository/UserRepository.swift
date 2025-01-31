@@ -19,6 +19,6 @@ final class UserRepository: UserRepositoryProtocol {
     }
 
     func getUsers() async throws -> [User] {
-        return try await networkService.fetchData(from: .users)
+        return try await networkService.fetchData(from: .users, method: .get)
     }
 }
