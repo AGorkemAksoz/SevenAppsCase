@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD6C6A572D4F7907001CBC48 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6C6A562D4F7907001CBC48 /* NetworkError.swift */; };
 		DEF156DD2D4B8F5100C27E80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF156DC2D4B8F5100C27E80 /* AppDelegate.swift */; };
 		DEF156DF2D4B8F5100C27E80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF156DE2D4B8F5100C27E80 /* SceneDelegate.swift */; };
 		DEF156E62D4B8F5E00C27E80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEF156E52D4B8F5E00C27E80 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD6C6A562D4F7907001CBC48 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DEF156D92D4B8F5100C27E80 /* SevenAppsCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SevenAppsCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF156DC2D4B8F5100C27E80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEF156DE2D4B8F5100C27E80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				DEF157112D4B928100C27E80 /* Endpoint.swift */,
 				DEF157132D4B92A400C27E80 /* NetworkService.swift */,
 				DEF157342D4CA91600C27E80 /* HTTPMethod.swift */,
+				DD6C6A562D4F7907001CBC48 /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				DEF1572C2D4BC1A700C27E80 /* UserDetailViewModel.swift in Sources */,
 				DEF157352D4CA91600C27E80 /* HTTPMethod.swift in Sources */,
 				DEF157142D4B92A400C27E80 /* NetworkService.swift in Sources */,
+				DD6C6A572D4F7907001CBC48 /* NetworkError.swift in Sources */,
 				DEF157192D4B93FB00C27E80 /* UserRepository.swift in Sources */,
 				DEF157122D4B928100C27E80 /* Endpoint.swift in Sources */,
 				DEF1572F2D4BC49E00C27E80 /* MapManager.swift in Sources */,

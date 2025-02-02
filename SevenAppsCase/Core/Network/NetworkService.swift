@@ -7,14 +7,6 @@
 
 import Foundation
 
-// MARK: - Network Error
-enum NetworkError: Error {
-    case badURL
-    case requestFailed
-    case decodingFailed
-    case unknown
-}
-
 // MARK: - Network Service Protocol
 protocol NetworkServiceProtocol {
     func fetchData<T: Decodable>(from endpoint: UserEndpoint, method: HTTPMethods) async throws -> T
@@ -38,7 +30,11 @@ final class NetworkService: NetworkServiceProtocol {
                 throw NetworkError.requestFailed
             }
             
-            return try JSONDecoder().decode(T.self, from: data)
+            do {
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                throw NetworkError.decodingFailed
+            }
         } catch {
             throw NetworkError.unknown
         }

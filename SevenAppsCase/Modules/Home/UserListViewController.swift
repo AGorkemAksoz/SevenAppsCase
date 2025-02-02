@@ -11,7 +11,10 @@ protocol UserListViewInterface: AnyObject {
     func configureVC()
     func configureUserListTableView()
     func reloadUserListTableView()
+    func configureActivityIndicator()
     func navigateToDetailScreen(user: User)
+    func showLoadingIndicator(_ show: Bool)
+    func showError(_ message: String)
 }
 
 // MARK: - User List ViewController
@@ -33,12 +36,19 @@ final class UserListViewController: UIViewController {
         return tableView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+         let indicator = UIActivityIndicatorView(style: .large)
+         indicator.hidesWhenStopped = true
+         return indicator
+     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.view = self
         viewModel.viewDidLoad()
         configureVC()
         configureUserListTableView()
+        configureActivityIndicator()
     }
 }
 
@@ -55,15 +65,35 @@ extension UserListViewController: UserListViewInterface {
         view.addSubview(tableView)
     }
     
+    func configureActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.center = view.center
+    }
+    
     func reloadUserListTableView() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
+            self?.showLoadingIndicator(false)
         }
     }
     
     func navigateToDetailScreen(user: User) {
         let detailVC = UserDetailViewController(user: user)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func showLoadingIndicator(_ show: Bool) {
+        DispatchQueue.main.async {
+            show ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    func showError(_ message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Hata!", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

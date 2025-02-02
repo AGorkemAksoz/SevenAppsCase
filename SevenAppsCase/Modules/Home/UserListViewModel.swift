@@ -32,11 +32,18 @@ extension UserListViewModel: UserListViewModelInterface {
     }
     
     func fetchUsers() async {
+        view?.showLoadingIndicator(true)
+        
         do {
             self.users = try await repository.getUsers()
             self.view?.reloadUserListTableView()
+        } catch let error as NetworkError {
+            view?.showError(error.localizedDescription)
         } catch {
-            print("Error: \(error.localizedDescription)")
+            let nsError = error as NSError
+            view?.showError(nsError.localizedDescription)
         }
+        
+        view?.showLoadingIndicator(false)
     }
 }
